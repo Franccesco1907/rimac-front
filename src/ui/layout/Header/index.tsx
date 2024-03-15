@@ -3,7 +3,7 @@ export const Header = () => {
     <nav className="container px-6 py-3 mx-auto flex justify-between items-center z-30 relative">
       <div>
         <img
-          src="/images/logo-rimac.svg"
+          src="images/logo-rimac.svg"
           alt="Rimac"
           width={73}
           height={26}
@@ -17,7 +17,7 @@ export const Header = () => {
 
         <div className="flex justify-end">
           <img
-            src="/images/telephone.svg"
+            src="images/telephone.svg"
             alt="telephone"
             width={20}
             height={20}

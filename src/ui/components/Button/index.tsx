@@ -21,7 +21,7 @@ export const Checkbox: FC<Props> = ({
   const checkmarkSize = size === 'sm' ? 'w-8 h-8' : 'w-6 h-6';
   const textSize = size === 'normal' ? 'text-sm' : 'text-lg';
   const sourceImage =
-    size === 'normal' ? '/images/gl-sm-check.svg' : '/images/gl_check.svg';
+    size === 'normal' ? 'images/gl-sm-check.svg' : 'images/gl_check.svg';
 
   return (
     <label

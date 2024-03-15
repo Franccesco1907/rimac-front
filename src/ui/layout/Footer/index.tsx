@@ -4,7 +4,7 @@ export const Footer = () => {
       <div className="container mx-auto flex flex-col lg:flex-row  justify-between items-center px-6 py-3">
         <div className="">
           <img
-            src="/images/logo-rimac-white.svg"
+            src="images/logo-rimac-white.svg"
             alt="Logo Rimac"
             width={85}
             height={42}

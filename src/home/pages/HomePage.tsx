@@ -22,7 +22,7 @@ export const HomePage = () => {
           <div className="w-full lg:w-1/2 h-full hidden lg:flex">
             <div className="w-full h-full relative m-auto">
               <img
-                src="/images/home-family.png"
+                src="images/home-family.png"
                 alt="Family Rimac"
                 className="w-full max-w-[480px]"
                 // layout="fixed"
@@ -44,7 +44,7 @@ export const HomePage = () => {
               </div>
               <div className="w-[136px] lg:hidden">
                 <img
-                  src="/images/home-family.png"
+                  src="images/home-family.png"
                   alt="Family Rimac"
                   width={136}
                   height={160}
