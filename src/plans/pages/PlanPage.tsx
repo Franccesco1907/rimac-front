@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../common/redux/userSlice";
 import { Checkbox } from '../../ui/components/Checkbox/index';
