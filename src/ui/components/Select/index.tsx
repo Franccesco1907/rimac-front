@@ -1,19 +1,19 @@
-import { ChangeEvent, CSSProperties, FunctionComponent, useState } from 'react';
+import { CSSProperties, FunctionComponent } from 'react';
+import { UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Option {
   value: string;
   label: string;
 }
 
-interface SelectProps {
+interface SelectProps extends UseFormRegisterReturn {
   options: Option[];
   value?: string;
-  name?: string;
   disabled?: boolean;
   className?: string;
   selectStyle?: CSSProperties;
   labelStyle?: CSSProperties;
-  onChange?: (value: string) => void;
+  register: UseFormRegister<string | any>;
 }
 
 export const Select: FunctionComponent<SelectProps> = ({
@@ -23,24 +23,13 @@ export const Select: FunctionComponent<SelectProps> = ({
   disabled = false,
   className,
   selectStyle,
-  onChange,
+  register,
 }) => {
-  const [selectedValue, setSelectedValue] = useState(value || '');
-
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = e.target.value;
-    setSelectedValue(selectedValue);
-    if (onChange) {
-      onChange(selectedValue);
-    }
-  };
-
   return (
     <div className={`${className ?? ''} relative`}>
       <select
         id={name}
-        name={name}
-        value={selectedValue}
+        value={value}
         className={`
           block w-full h-14 p-4 pr-12 bg-transparent text-base
           rounded-lg border
@@ -50,7 +39,7 @@ export const Select: FunctionComponent<SelectProps> = ({
         `}
         style={selectStyle}
         disabled={disabled}
-        onChange={handleChange}
+        {...register(name)}
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

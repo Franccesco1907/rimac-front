@@ -1,16 +1,13 @@
 import {
   CSSProperties,
-  ChangeEvent,
   FocusEvent,
-  FunctionComponent,
-  useRef,
-  useState
+  FunctionComponent
 } from 'react';
+import { UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
 
-export interface InputProps {
+export interface InputProps extends UseFormRegisterReturn {
   variant?: 'primary' | 'success' | 'error';
   type?: 'text' | 'password' | 'email' | 'tel' | 'date' | 'number';
-  name?: string;
   label: string;
   value?: string;
   feedback?: string;
@@ -18,11 +15,10 @@ export interface InputProps {
   className?: string;
   inputStyle?: CSSProperties;
   labelStyle?: CSSProperties;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
   autocomplete?: boolean;
   readonly?: boolean;
+  register: UseFormRegister<string | any>;
 }
 
 export const Input: FunctionComponent<InputProps> = ({
@@ -36,23 +32,16 @@ export const Input: FunctionComponent<InputProps> = ({
   feedback,
   inputStyle,
   labelStyle,
-  onChange,
   onFocus,
-  onBlur,
   autocomplete = true,
   readonly = false,
+  register
 }) => {
-  const [defaultName] = useState(`${Date.now()}`);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const labelRef = useRef<HTMLLabelElement>(null);
-
   return (
     <div className={`${className ?? ''} relative`}>
       <input
-        id={name ?? defaultName}
-        ref={inputRef}
+        id={name}
         type={type}
-        name={name ?? defaultName}
         className={`
             block h-14 w-full p-4 pt-8 bg-transparent text-base
             rounded-lg border
@@ -73,16 +62,14 @@ export const Input: FunctionComponent<InputProps> = ({
         placeholder={label}
         value={value}
         disabled={disabled}
-        onChange={onChange}
         onFocus={onFocus}
-        onBlur={onBlur}
-        data-testid={name ?? defaultName}
+        data-testid={name}
         autoComplete={autocomplete ? 'on' : 'off'}
         readOnly={readonly}
+        {...register(name)}
       />
       <label
-        ref={labelRef}
-        htmlFor={name ?? defaultName}
+        htmlFor={name}
         className={`
             absolute top-[6px] left-3 px-1
             text-xs whitespace-nowrap

@@ -1,56 +1,35 @@
-import {
-  MouseEvent,
-  FunctionComponent,
-  FormEvent,
-  ReactNode,
-} from 'react';
-
-export interface ButtonProps {
-  name?: string;
-  type?: 'button' | 'submit';
-  variant?: 'primary' | 'secondary';
-  disabled?: boolean;
-  className?: string;
-  loading?: boolean;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onSubmit?: (event: FormEvent<HTMLButtonElement>) => void;
-  children?: ReactNode;
+import { FC } from 'react';
+interface Props {
+  text?: string;
+  isActive?: boolean;
+  type?: 'rounded' | 'square';
+  size?: 'sm' | 'normal';
+  bgColor?: 'black' | 'green';
+  textColor?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const variantBackground = {
-  primary: 'bg-primary',
-  secondary: 'bg-secondary',
-};
-
-export const Button: FunctionComponent<ButtonProps> = ({
-  name,
-  type = 'button',
-  variant = 'primary',
-  disabled = false,
-  className,
-  onClick,
-  onSubmit,
-  children,
+export const Checkbox: FC<Props> = ({
+  text,
+  bgColor = '',
+  textColor = '',
+  size = 'normal',
+  type = 'square',
+  ...field
 }) => {
+  const borderColor = 'border-gray-300';
+  const borderRadius = type === 'square' ? 'rounded' : 'rounded-full';
+  const checkmarkSize = size === 'sm' ? 'w-8 h-8' : 'w-6 h-6';
+  const textSize = size === 'normal' ? 'text-sm' : 'text-lg';
+
   return (
-    <button
-      type={type}
-      name={name}
-      disabled={disabled}
-      className={`
-        relative px-10 py-4
-        rounded-full
-        text-white
-        font-bold
-        ${variantBackground[variant]}
-        ${className ?? ''}
-      `}
-      onClick={onClick}
-      onSubmit={onSubmit}
-    >
-      <span className={`flex items-center justify-center pointer-events-none`}>
-        {children}
-      </span>
-    </button>
+    <label className={`flex items-center cursor-pointer ${textSize}`}>
+      <input
+        {...field}
+        type="checkbox"
+        className={`flex justify-center items-center cursor-pointer p-1 border ${textColor} ${checkmarkSize} ${borderColor} ${bgColor} ${borderRadius} bg-no-repeat accent-white-500`}
+      />
+      <span className="ml-2">{text}</span>
+    </label>
   );
 };
